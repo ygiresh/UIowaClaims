@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Please choose from an option below.</p>
+    <div class="row justify-content-center">
+        <div class="card col col-lg-2">
+            <div class="card-body">
+                <h5 class="card-title">File a claim</h5>
+                <img width="40" height="60" src="~/images/bill-payment-two-color.svg" />
+                <p class="card-text">Fill in the claim details and submit.</p>
+                <a href="/Claim" class="card-link">Click here</a>
+            </div>
+        </div>
+        <div class="card col col-lg-2 offset-lg-1">
+            <div class="card-body">
+                <h5 class="card-title">View Your Claims</h5>
+                <img width="40" height="60" src="~/images/spreadsheet-two-color.svg" />
+                <p class="card-text">View list of your claims.</p>
+                <a href="/Claim/List" class="card-link">Click here</a>
+            </div>
+        </div>
+    </div>
+</div>

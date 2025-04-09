@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="card-title mb-0">Reimbursement Form</h5>
+            </div>
+            <div class="card-body">
+                <ng-container *ngIf="!formSubmitted; else successMessage">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="userId" class="form-label">User ID</label>
+                            <input id="userId" formControlName="userId" type="text" class="form-control" placeholder="Enter your User ID" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="amount" class="form-label">Amount</label>
+                            <input id="amount" formControlName="amount" type="number" class="form-control" placeholder="Enter the amount" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Date</label>
+                            <input id="date" formControlName="date" type="date" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="file" class="form-label">File</label>
+                            <input id="file" type="file" class="form-control" (change)="onFileChange($event)" />
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </ng-container>
+                <ng-template #successMessage>
+                    <div class="alert alert-success text-center" role="alert">
+                        Form submitted successfully!
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

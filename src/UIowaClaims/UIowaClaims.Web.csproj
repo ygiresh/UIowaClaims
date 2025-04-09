@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <Target Name="BuildAngular" BeforeTargets="Build">
+    <!-- Step 1: Install dependencies -->
+    <Exec Command="npm install" WorkingDirectory="ClientApp" />
+
+    <!-- Step 2: Build Angular with base href -->
+    <Exec Command="npm run build -- --output-hashing=none" WorkingDirectory="ClientApp">
+      <Output TaskParameter="ExitCode" PropertyName="AngularExitCode" />
+    </Exec>
+
+    <!-- Step 3: Fail build if Angular fails -->
+    <Error Condition="'$(AngularExitCode)' != '0'" Text="Angular build failed." />
+
+    <!-- Step 4: Copy output to wwwroot/angular -->
+    <RemoveDir Directories="wwwroot\\angular" />
+    <MakeDir Directories="wwwroot\\angular" />
+    <Copy SourceFiles="@(AngularFiles)" DestinationFolder="wwwroot\\angular\\%(RecursiveDir)" SkipUnchangedFiles="true" />
+  </Target>
+
+  <ItemGroup>
+    <!-- Point to the correct browser build path -->
+    <AngularFiles Include="ClientApp\\dist\\reimbursement-app\\browser\\**\\*" />
+  </ItemGroup>
+
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\" />
+    <Folder Include="wwwroot\angular\" />
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+</Project>
